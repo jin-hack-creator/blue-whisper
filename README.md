@@ -1,46 +1,66 @@
-# 💬 BlueVision
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=0E92E2&center=true&vCenter=true&width=435&lines=Bienvenue+sur+BlueVision!;Messagerie+anonyme+et+sécurisée.;Juste+un+pseudo+et+une+photo+de+profil." alt="Typing SVG" />
+</p>
 
-BlueVision est une application de messagerie sécurisée permettant aux utilisateurs d’échanger librement sans révéler leur numéro de téléphone ni adresse email. L’unique identité visible est un **pseudo** et une **photo de profil**, garantissant confidentialité et anonymat dans un environnement moderne et fluide.
+<div align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=flat-square&logo=vercel" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square&logo=open-source-initiative" />
+  <img src="https://img.shields.io/badge/status-En+développement-orange?style=flat-square" />
+</div>
 
 ---
 
-## 🌌 Thème & Design
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG5yNGRnY2RuM2U4a3F5ODViZXZ4enp0ejNvOWJjYnJmeGpxdDNzZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RbDKaczqWovIugyJmW/giphy.gif" width="100%" />
 
-- **Mode sombre (Dark)** : Bleu foncé moderne
-- **Interface** : Responsive, fluide, minimaliste
-- **Technos UI** : HTML, CSS (Tailwind ou custom), JS (Vanilla ou React)
+---
+
+# 🌌 BlueVision
+
+> 💬 Une **messagerie privée** et **anonyme**, sans numéro ni email.  
+> 👤 Identité limitée au **pseudo + photo de profil**.  
+> 🔐 Chiffrement, contrôle et liberté totale.
 
 ---
 
 ## 🚀 Fonctionnalités principales
 
-- 🔐 **Anonymat garanti** (pas de mail ni numéro requis)
-- 💬 **Messagerie instantanée** (en temps réel)
-- 👤 **Pseudo + photo uniquement**
-- 🔒 **Chiffrement des messages** (E2EE)
-- 🗑️ **Messages éphémères** (optionnel)
-- ⚙️ **Mode privé** (masquage notification, anti-screenshot)
-- 🧑‍🤝‍🧑 **Groupes de discussion**
-- 📷 **Envoi de fichiers/images**
-- 📛 **Signalement & blocage**
-- 📥 **Clé unique d'identification** (clé privée locale)
+- 🔐 **Anonymat total** : pas de numéro / mail requis
+- ⚡ **Chat en temps réel** (via WebSocket)
+- 💾 **Messages éphémères & auto-suppression**
+- 📤 **Envoi de fichiers / images**
+- 🧑‍🤝‍🧑 **Groupes et canaux**
+- 🔒 **Clé privée d’accès** (exportable)
+- 🚫 **Blocage, signalement, confidentialité**
+- 🌑 **Interface en dark-mode (bleu foncé)**
 
 ---
 
-## 🧩 Technologies utilisées
+## 🎨 Thème & Design
 
-### 🖥️ Front-End
-- HTML5 / CSS3
-- JavaScript (Vanilla ou Framework)
-- TailwindCSS ou Material UI
-
-### 🧠 Back-End
-- Node.js + Express
-- MongoDB ou PostgreSQL
-- WebSocket ou Socket.io (pour chat en temps réel)
-- JWT pour l’authentification
+| Élément        | Style                          |
+|----------------|--------------------------------|
+| Palette        | `#0E1117`, `#1F2937`, `#2563EB`|
+| Typographie    | Poppins / Fira Code            |
+| UI             | Menu fluide, responsive, animations CSS |
+| Technologies   | HTML, CSS (Tailwind), JS, React (optionnel) |
 
 ---
 
-## 📂 Structure du projet (exemple)
+## 🧠 Stack Technique
 
+| Frontend    | Backend         | Base de données | Temps réel     |
+|-------------|------------------|------------------|----------------|
+| HTML/CSS/JS | Node.js + Express| MongoDB / PostgreSQL | Socket.io / WebSocket |
+
+---
+
+## 🗂️ Structure du projet
+
+```bash
+bluevision/
+├── client/       # Front-end (HTML, CSS, JS)
+├── server/       # Back-end (API, auth)
+├── database/     # Modèles de données
+├── public/       # Ressources statiques (avatars)
+├── README.md
+└── .env
