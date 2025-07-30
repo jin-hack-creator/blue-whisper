@@ -8,89 +8,91 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* BlueVision Theme - Light mode (fallback) */
+    --background: 210 20% 10%; /* #0D1B2A - bleu nuit */
+    --foreground: 60 9% 87%; /* #E0E1DD - blanc cassé */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 20% 12%;
+    --card-foreground: 60 9% 87%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 20% 10%;
+    --popover-foreground: 60 9% 87%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 207 79% 37%; /* #1B6CA8 - bleu vif */
+    --primary-foreground: 60 9% 87%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 25% 15%;
+    --secondary-foreground: 60 9% 87%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 15% 20%;
+    --muted-foreground: 60 9% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 207 79% 37%;
+    --accent-foreground: 60 9% 87%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 60 9% 87%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 15% 25%;
+    --input: 210 15% 18%;
+    --ring: 207 79% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* BlueVision gradients and effects */
+    --gradient-primary: linear-gradient(135deg, hsl(207 79% 37%), hsl(207 79% 47%));
+    --gradient-secondary: linear-gradient(180deg, hsl(210 20% 10%), hsl(210 25% 15%));
+    --shadow-neon: 0 0 20px hsl(207 79% 37% / 0.3);
+    --shadow-elegant: 0 10px 30px -10px hsl(210 20% 5% / 0.5);
+    
+    --sidebar-background: 210 20% 10%;
+    --sidebar-foreground: 60 9% 87%;
+    --sidebar-primary: 207 79% 37%;
+    --sidebar-primary-foreground: 60 9% 87%;
+    --sidebar-accent: 210 25% 15%;
+    --sidebar-accent-foreground: 60 9% 87%;
+    --sidebar-border: 210 15% 25%;
+    --sidebar-ring: 207 79% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* BlueVision Theme - Dark mode (main) */
+    --background: 210 20% 10%; /* #0D1B2A - bleu nuit */
+    --foreground: 60 9% 87%; /* #E0E1DD - blanc cassé */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 20% 12%;
+    --card-foreground: 60 9% 87%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 20% 10%;
+    --popover-foreground: 60 9% 87%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 207 79% 37%; /* #1B6CA8 - bleu vif */
+    --primary-foreground: 60 9% 87%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 25% 15%;
+    --secondary-foreground: 60 9% 87%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 15% 20%;
+    --muted-foreground: 60 9% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 207 79% 37%;
+    --accent-foreground: 60 9% 87%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 60 9% 87%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 210 15% 25%;
+    --input: 210 15% 18%;
+    --ring: 207 79% 50%;
+    
+    --sidebar-background: 210 20% 10%;
+    --sidebar-foreground: 60 9% 87%;
+    --sidebar-primary: 207 79% 37%;
+    --sidebar-primary-foreground: 60 9% 87%;
+    --sidebar-accent: 210 25% 15%;
+    --sidebar-accent-foreground: 60 9% 87%;
+    --sidebar-border: 210 15% 25%;
+    --sidebar-ring: 207 79% 50%;
   }
 }
 
@@ -100,6 +102,24 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    @apply dark; /* Force dark theme for BlueVision */
+  }
+}
+
+@layer components {
+  .btn-gradient {
+    @apply bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary transition-all duration-300;
+  }
+  
+  .card-glass {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+  }
+  
+  .neon-glow {
+    box-shadow: var(--shadow-neon);
   }
 }
