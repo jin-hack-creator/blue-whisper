@@ -3,13 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MessageCircle, User, Upload, Download, ArrowLeft, Check } from "lucide-react";
+import { MessageCircle, User, Upload, Key, ArrowLeft, Check } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Register = () => {
   const [step, setStep] = useState(1);
   const [pseudo, setPseudo] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,27 +31,42 @@ const Register = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast({
+        title: "Erreur",
+        description: "Les mots de passe ne correspondent pas.",
+        variant: "destructive",
+      });
+      return;
+    }
     setIsLoading(true);
 
     try {
-      // À remplacer par votre logique d'inscription
-      // Exemple avec Supabase :
-      /*
       const { data, error } = await supabase.auth.signUp({
-        email: `${pseudo}@bluevision.com`, // ou autre identifiant
-        password: generateRandomPassword(),
+        email: `${pseudo}@bluevision.com`,
+        password: password,
         options: {
           data: {
             username: pseudo,
-            avatar_url: profileImage ? await uploadImage(profileImage) : null
           }
         }
       });
 
       if (error) throw error;
-      */
 
-      // Simuler le succès pour la structure UI
+      if (profileImage) {
+        const { error: uploadError } = await supabase.storage
+          .from('avatars')
+          .upload(`${data.user?.id}/profile.png`, profileImage, {
+            cacheControl: '3600',
+            upsert: true,
+          });
+
+        if (uploadError) {
+          console.error("Error uploading image:", uploadError);
+        }
+      }
+
       setStep(2);
       toast({
         title: "Compte créé !",
@@ -57,7 +75,7 @@ const Register = () => {
     } catch (error) {
       toast({
         title: "Erreur",
-        description: error.message,
+        description: "Une erreur est survenue lors de la création du compte.",
         variant: "destructive",
       });
     } finally {
@@ -148,6 +166,38 @@ const Register = () => {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="password" className="flex items-center space-x-2">
+                <Key className="w-4 h-4 text-primary" />
+                <span>Mot de passe</span>
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Votre mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-input border-border/50 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="flex items-center space-x-2">
+                <Key className="w-4 h-4 text-primary" />
+                <span>Confirmer le mot de passe</span>
+              </Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirmez votre mot de passe"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="bg-input border-border/50 focus:border-primary"
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label className="flex items-center space-x-2">
                 <Upload className="w-4 h-4 text-primary" />
                 <span>Photo de profil</span>
@@ -203,7 +253,7 @@ const Register = () => {
             <Button
               type="submit"
               className="w-full btn-gradient text-lg py-6 neon-glow"
-              disabled={isLoading || !pseudo}
+              disabled={isLoading || !pseudo || !password || !confirmPassword}
             >
               {isLoading ? "Création du compte..." : "Créer mon compte"}
             </Button>

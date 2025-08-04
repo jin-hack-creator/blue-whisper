@@ -6,10 +6,11 @@ import { Label } from "@/components/ui/label";
 import { MessageCircle, Key, User, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Auth = () => {
   const [pseudo, setPseudo] = useState("");
-  const [secretKey, setSecretKey] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -17,24 +18,29 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
 
-   
-    setTimeout(() => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: `${pseudo}@bluevision.com`,
+        password: password,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Connexion réussie !",
+        description: `Bienvenue ${pseudo}`,
+      });
+
+      window.location.href = "/chat";
+    } catch (error) {
+      toast({
+        title: "Erreur de connexion",
+        description: "Vérifiez votre pseudo et votre mot de passe",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-      if (pseudo && secretKey) {
-        toast({
-          title: "Connexion réussie !",
-          description: `Bienvenue ${pseudo}`,
-        });
-        
-        window.location.href = "/chat";
-      } else {
-        toast({
-          title: "Erreur de connexion",
-          description: "Vérifiez votre pseudo et votre clé secrète",
-          variant: "destructive",
-        });
-      }
-    }, 1500);
+    }
   };
 
   return (
@@ -73,22 +79,19 @@ const Auth = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="secretKey" className="flex items-center space-x-2">
+              <Label htmlFor="password" className="flex items-center space-x-2">
                 <Key className="w-4 h-4 text-primary" />
-                <span>Clé secrète</span>
+                <span>Mot de passe</span>
               </Label>
               <Input
-                id="secretKey"
+                id="password"
                 type="password"
-                placeholder="Votre clé d'identification"
-                value={secretKey}
-                onChange={(e) => setSecretKey(e.target.value)}
+                placeholder="Votre mot de passe"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="bg-input border-border/50 focus:border-primary"
                 required
               />
-              <p className="text-xs text-muted-foreground">
-                Cette clé a été générée lors de votre inscription
-              </p>
             </div>
 
             <Button
