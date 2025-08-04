@@ -2,15 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+
 
 @layer base {
   :root {
-    /* BlueVision Theme - Light mode (fallback) */
-    --background: 210 20% 10%; /* #0D1B2A - bleu nuit */
-    --foreground: 60 9% 87%; /* #E0E1DD - blanc cassé */
+    
+    --background: 210 20% 10%; 
+    --foreground: 60 9% 87%; 
 
     --card: 210 20% 12%;
     --card-foreground: 60 9% 87%;
@@ -18,7 +16,7 @@ All colors MUST be HSL.
     --popover: 210 20% 10%;
     --popover-foreground: 60 9% 87%;
 
-    --primary: 207 79% 37%; /* #1B6CA8 - bleu vif */
+    --primary: 207 79% 37%;
     --primary-foreground: 60 9% 87%;
 
     --secondary: 210 25% 15%;
@@ -39,7 +37,7 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* BlueVision gradients and effects */
+    
     --gradient-primary: linear-gradient(135deg, hsl(207 79% 37%), hsl(207 79% 47%));
     --gradient-secondary: linear-gradient(180deg, hsl(210 20% 10%), hsl(210 25% 15%));
     --shadow-neon: 0 0 20px hsl(207 79% 37% / 0.3);
@@ -56,9 +54,9 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* BlueVision Theme - Dark mode (main) */
-    --background: 210 20% 10%; /* #0D1B2A - bleu nuit */
-    --foreground: 60 9% 87%; /* #E0E1DD - blanc cassé */
+    
+    --background: 210 20% 10%; 
+    --foreground: 60 9% 87%; 
 
     --card: 210 20% 12%;
     --card-foreground: 60 9% 87%;
@@ -66,7 +64,7 @@ All colors MUST be HSL.
     --popover: 210 20% 10%;
     --popover-foreground: 60 9% 87%;
 
-    --primary: 207 79% 37%; /* #1B6CA8 - bleu vif */
+    --primary: 207 79% 37%; 
     --primary-foreground: 60 9% 87%;
 
     --secondary: 210 25% 15%;
@@ -106,7 +104,7 @@ All colors MUST be HSL.
   }
 
   html {
-    @apply dark; /* Force dark theme for BlueVision */
+    @apply dark; 
   }
 }
 

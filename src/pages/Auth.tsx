@@ -17,7 +17,7 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulation de connexion
+   
     setTimeout(() => {
       setIsLoading(false);
       if (pseudo && secretKey) {
@@ -25,7 +25,7 @@ const Auth = () => {
           title: "Connexion réussie !",
           description: `Bienvenue ${pseudo}`,
         });
-        // Redirection vers l'interface de discussion
+        
         window.location.href = "/chat";
       } else {
         toast({

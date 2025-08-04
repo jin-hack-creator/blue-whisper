@@ -27,10 +27,10 @@ const Privacy = () => {
         </nav>
       </header>
 
-      {/* Main Content */}
+      { }
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
+          { }
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-accent rounded-2xl mb-6 neon-glow">
               <Shield className="w-10 h-10 text-primary-foreground" />
@@ -44,7 +44,7 @@ const Privacy = () => {
             </p>
           </div>
 
-          {/* Key Principles */}
+          { }
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             <Card className="card-glass p-6">
               <Eye className="w-12 h-12 text-primary mb-4" />
@@ -65,9 +65,9 @@ const Privacy = () => {
             </Card>
           </div>
 
-          {/* Detailed Sections */}
+          { }
           <div className="space-y-12">
-            {/* Data Collection */}
+            { }
             <Card className="card-glass">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-3">
@@ -125,7 +125,7 @@ const Privacy = () => {
               </CardContent>
             </Card>
 
-            {/* Security */}
+            { }
             <Card className="card-glass">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-3">
@@ -209,7 +209,7 @@ const Privacy = () => {
             </Card>
           </div>
 
-          {/* Contact */}
+          { }
           <div className="text-center mt-16 p-8 card-glass rounded-2xl">
             <h3 className="text-2xl font-bold mb-4">Questions sur la Confidentialité ?</h3>
             <p className="text-muted-foreground mb-6">

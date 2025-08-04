@@ -14,55 +14,22 @@ import {
 
 interface ChatWindowProps {
   conversationId: string;
+  currentUser: {
+    id: string;
+    username: string;
+    avatar_url?: string;
+  };
 }
 
-export const ChatWindow = ({ conversationId }: ChatWindowProps) => {
+export const ChatWindow = ({ conversationId, currentUser }: ChatWindowProps) => {
   const [message, setMessage] = useState("");
-
-  // Messages simulés
-  const messages = [
-    {
-      id: "1",
-      sender: "Alice92",
-      content: "Salut ! Comment ça va ?",
-      timestamp: "14:25",
-      isOwn: false
-    },
-    {
-      id: "2",
-      sender: "Moi",
-      content: "Ça va bien merci ! Et toi ?",
-      timestamp: "14:26",
-      isOwn: true
-    },
-    {
-      id: "3",
-      sender: "Alice92",
-      content: "Super ! Tu as vu le nouveau design de l'app ?",
-      timestamp: "14:27",
-      isOwn: false
-    },
-    {
-      id: "4",
-      sender: "Moi",
-      content: "Oui, c'est vraiment réussi ! J'adore le thème sombre et les effets de lumière",
-      timestamp: "14:28",
-      isOwn: true
-    },
-    {
-      id: "5",
-      sender: "Alice92",
-      content: "Moi aussi ! L'équipe a fait du super boulot 🎨",
-      timestamp: "14:30",
-      isOwn: false
-    }
-  ];
+  const [messages, setMessages] = useState<any[]>([]);
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim()) {
-      // Logique d'envoi de message
-      console.log("Envoi du message:", message);
+      // Logique d'envoi de message à implémenter plus tard
+      console.log("Message à envoyer:", message);
       setMessage("");
     }
   };
@@ -76,13 +43,13 @@ export const ChatWindow = ({ conversationId }: ChatWindowProps) => {
             <div className="relative">
               <Avatar className="w-10 h-10">
                 <AvatarFallback className="bg-primary text-primary-foreground">
-                  A
+                  U
                 </AvatarFallback>
               </Avatar>
               <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
             </div>
             <div>
-              <h3 className="font-medium">Alice92</h3>
+              <h3 className="font-medium">Utilisateur</h3>
               <p className="text-sm text-muted-foreground">En ligne</p>
             </div>
           </div>
@@ -104,35 +71,41 @@ export const ChatWindow = ({ conversationId }: ChatWindowProps) => {
       {/* Messages Area */}
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.isOwn ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`flex items-end space-x-2 max-w-[70%] ${msg.isOwn ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                {!msg.isOwn && (
-                  <Avatar className="w-8 h-8">
-                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">
-                      {msg.sender.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                )}
-                
-                <div className={`
-                  px-4 py-2 rounded-2xl 
-                  ${msg.isOwn 
-                    ? 'bg-primary text-primary-foreground rounded-br-md' 
-                    : 'bg-secondary text-secondary-foreground rounded-bl-md'
-                  }
-                `}>
-                  <p className="text-sm">{msg.content}</p>
-                  <p className={`text-xs mt-1 ${msg.isOwn ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
-                    {msg.timestamp}
-                  </p>
+          {messages.length === 0 ? (
+            <div className="flex justify-center items-center h-64">
+              <p className="text-muted-foreground">Aucun message pour le moment</p>
+            </div>
+          ) : (
+            messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`flex ${msg.isOwn ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`flex items-end space-x-2 max-w-[70%] ${msg.isOwn ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                  {!msg.isOwn && (
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                        {msg.sender?.username?.charAt(0)?.toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                  )}
+                  
+                  <div className={`
+                    px-4 py-2 rounded-2xl 
+                    ${msg.isOwn 
+                      ? 'bg-primary text-primary-foreground rounded-br-md' 
+                      : 'bg-secondary text-secondary-foreground rounded-bl-md'
+                    }
+                  `}>
+                    <p className="text-sm">{msg.content}</p>
+                    <p className={`text-xs mt-1 ${msg.isOwn ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                      {msg.timestamp}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </ScrollArea>
 

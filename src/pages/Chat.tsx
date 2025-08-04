@@ -24,12 +24,12 @@ const Chat = () => {
 
   return (
     <div className="h-screen bg-background flex">
-      {/* Sidebar - Desktop */}
+      { }
       <div className="hidden md:block">
         <Sidebar />
       </div>
 
-      {/* Sidebar - Mobile */}
+      { }
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
@@ -39,7 +39,7 @@ const Chat = () => {
         </div>
       )}
 
-      {/* Conversations List */}
+      {   }
       <div className="w-full md:w-80 border-r border-border/50 bg-card/50">
         <ConversationsList 
           selectedConversation={selectedConversation}
@@ -48,7 +48,7 @@ const Chat = () => {
         />
       </div>
 
-      {/* Chat Window */}
+      { }
       <div className="flex-1">
         {selectedConversation ? (
           <ChatWindow conversationId={selectedConversation} />

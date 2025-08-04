@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MessageCircle, User, Upload, Download, ArrowLeft, Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const Register = () => {
@@ -12,9 +12,9 @@ const Register = () => {
   const [pseudo, setPseudo] = useState("");
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState("");
-  const [generatedKey, setGeneratedKey] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -26,56 +26,43 @@ const Register = () => {
     }
   };
 
-  const generateSecretKey = () => {
-    // Génération d'une clé unique simulée
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < 32; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  };
-
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulation de l'inscription
-    setTimeout(() => {
-      const key = generateSecretKey();
-      setGeneratedKey(key);
-      setIsLoading(false);
+    try {
+      // À remplacer par votre logique d'inscription
+      // Exemple avec Supabase :
+      /*
+      const { data, error } = await supabase.auth.signUp({
+        email: `${pseudo}@bluevision.com`, // ou autre identifiant
+        password: generateRandomPassword(),
+        options: {
+          data: {
+            username: pseudo,
+            avatar_url: profileImage ? await uploadImage(profileImage) : null
+          }
+        }
+      });
+
+      if (error) throw error;
+      */
+
+      // Simuler le succès pour la structure UI
       setStep(2);
-      
       toast({
         title: "Compte créé !",
-        description: "Votre clé secrète a été générée",
+        description: "Votre compte a été créé avec succès",
       });
-    }, 2000);
-  };
-
-  const downloadKey = () => {
-    const keyData = {
-      pseudo: pseudo,
-      secretKey: generatedKey,
-      createdAt: new Date().toISOString(),
-      version: "1.0"
-    };
-    
-    const blob = new Blob([JSON.stringify(keyData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${pseudo}_bluevision.bvk`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    toast({
-      title: "Clé téléchargée !",
-      description: "Conservez ce fichier précieusement",
-    });
+    } catch (error) {
+      toast({
+        title: "Erreur",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (step === 2) {
@@ -92,39 +79,25 @@ const Register = () => {
               Compte créé avec succès !
             </CardTitle>
             <CardDescription className="text-muted-foreground">
-              Votre clé secrète a été générée
+              Vous pouvez maintenant vous connecter
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <div className="bg-secondary/50 p-4 rounded-lg border border-border/50">
-              <Label className="text-sm font-medium text-muted-foreground mb-2 block">
-                Votre clé secrète :
-              </Label>
-              <div className="bg-input p-3 rounded-md font-mono text-sm break-all">
-                {generatedKey}
-              </div>
-              <p className="text-xs text-muted-foreground mt-2">
-                ⚠️ Conservez cette clé précieusement, elle est unique et irremplaçable !
-              </p>
-            </div>
-
-            <Button
-              onClick={downloadKey}
-              className="w-full btn-gradient neon-glow"
-            >
-              <Download className="w-4 h-4 mr-2" />
-              Télécharger ma clé (.bvk)
-            </Button>
-
             <div className="text-center space-y-4">
-              <p className="text-xs text-muted-foreground">
-                Le fichier .bvk contient votre clé et peut être utilisé pour récupérer votre accès
+              <p className="text-sm text-muted-foreground">
+                Votre identité <span className="font-medium text-primary">{pseudo}</span> a été enregistrée
               </p>
               
               <Link to="/auth">
-                <Button className="w-full" variant="outline">
+                <Button className="w-full btn-gradient">
                   Se connecter maintenant
+                </Button>
+              </Link>
+
+              <Link to="/">
+                <Button className="w-full" variant="outline">
+                  Retour à l'accueil
                 </Button>
               </Link>
             </div>
@@ -147,7 +120,7 @@ const Register = () => {
             Rejoindre BlueVision
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            Créez votre identité anonyme en quelques étapes
+            Créez votre identité anonyme
           </CardDescription>
         </CardHeader>
 
@@ -166,9 +139,11 @@ const Register = () => {
                 onChange={(e) => setPseudo(e.target.value)}
                 className="bg-input border-border/50 focus:border-primary"
                 required
+                minLength={3}
+                maxLength={20}
               />
               <p className="text-xs text-muted-foreground">
-                Ce sera votre identité publique sur BlueVision
+                3 à 20 caractères - lettres, chiffres et underscores
               </p>
             </div>
 
@@ -221,7 +196,7 @@ const Register = () => {
                 />
               </div>
               <p className="text-xs text-muted-foreground">
-                Optionnel - Vous pourrez la modifier plus tard
+                Optionnel - Formats: JPG, PNG (max 2MB)
               </p>
             </div>
 
